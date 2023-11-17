@@ -9,14 +9,14 @@ resource "azurerm_subnet" "snet" {
 
   # uncomnet this block to enable delegation
 
-  # delegation {
-  #   name = "snet-functionapps-nonprod-delegation"
+  delegation {
+    name = "${azurerm_subnet.name}-delegation"
 
-  #   service_delegation {
-  #     name    = "Microsoft.Web/serverFarms"
-  #     actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-  #   }
-  # }
+    service_delegation {
+      name    = "Microsoft.Web/serverFarms"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
 
   lifecycle {
     create_before_destroy = true
