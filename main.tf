@@ -10,7 +10,7 @@ resource "azurerm_subnet" "snet" {
   # uncomnet this block to enable delegation
 
   delegation {
-    name = "${azurerm_subnet.name}-delegation"
+    name = "${var.name}-delegation"
 
     service_delegation {
       name    = "Microsoft.Web/serverFarms"
