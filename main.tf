@@ -7,14 +7,16 @@ resource "azurerm_subnet" "snet" {
   private_endpoint_network_policies_enabled     = true
   private_link_service_network_policies_enabled = true
 
-  # uncomnet this block to enable delegation
 
-  delegation {
-    name = "${var.name}-delegation"
+  dynamic "delegation" {
+    for_each = var.enable_delegation ? [1] : []
+    content {
+      name = "${var.name}-delegation"
 
-    service_delegation {
-      name    = "Microsoft.Web/serverFarms"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+      service_delegation {
+        name    = "Microsoft.Web/serverFarms"
+        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+      }
     }
   }
 

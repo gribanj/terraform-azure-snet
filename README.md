@@ -1,10 +1,8 @@
-# Terraform Subnet Module
+# 🌐 Terraform Subnet Module
 
-This module handles the creation and data fetching of Azure Subnets within a specified virtual network based on the specified conditions.
+This module 🧰 handles the creation and fetching of Azure Subnets within a specified virtual network. It's designed to "create if not exist" - creating resources only when they don't already exist.
 
-The module follows the principles of "create if not exist". The resource is only created if it doesn't exist. If it exists, it fetches the data of the existing resource.
-
-## Module Declaration / Usage
+## Usage 🚀
 
 ```hcl
 module "snet" {
@@ -13,21 +11,22 @@ module "snet" {
   name                  = "snet-xxxxxx-prod"
   resource_group_name   = "rg-xxxxxx-prod"
   virtual_network_name  = "vnet-xxxxxx-prod"
-  address_prefixes      = ["10.0.1.0/24"] # e.g. [cidrsubnet(module.vnet.vnet_output[0].address_space[0], 4, 0)]
+  address_prefixes      = ["10.0.1.0/24"]
+  enable_delegation     = false  # Set to true to enable delegation
 }
 ```
 
-`create` variable is a flag to determine whether the resource should be created.
-If create is true, the resource is created.
-If create is false, the module will try to fetch the data of an existing resource with the same name.
+`create` variable is a flag 🚩 to determine whether the resource should be created.
+If create is true ✅, the resource is created.
+If create is false ❌, the module will try to fetch the data of an existing resource with the same name.
 
-## Ternary Operator
+## Ternary Operator 🤔
 
 This module makes use of the ternary operation, which is a simple form of if-else conditional logic. It's structured as follows:
 
 `condition ? true_val : false_val`
 
-- `condition`: This is a statement that evaluates to either true or false.
+- `condition`: This is a statement that evaluates to either true ✅ or false ❌.
 - `true_val`: If the condition is true, this value will be used.
 - `false_val`: If the condition is false, this value will be used.
   or instance, in the azurerm_virtual_network resource in this module, we use a ternary operation in the `count` parameter:
@@ -40,13 +39,13 @@ If var.create is true, the count will be 1, meaning one virtual network will be 
 If var.create is false, the count will be 0, meaning no virtual network will be created.
 ```
 
-## Resources
+## Resources 🏗️
 
 This module manages the following resources:
 
 - `azurerm_subnet:` Manages a subnet.
 
-## Input Variables
+## Input Variables 📥
 
 - `create:` A boolean flag to create the subnet or fetch the data of an existing one.
 - `name:` The name of the subnet.

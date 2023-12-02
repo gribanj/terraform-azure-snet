@@ -28,3 +28,9 @@ variable "create" {
   type        = bool
   default     = false
 }
+
+variable "enable_delegation" {
+  description = "value to control whether to enable delegation or not"
+  type        = bool
+  default     = false
+}
