@@ -52,6 +52,7 @@ This module manages the following resources:
 - `resource_group_name:` The name of the resource group in which the subnet is located.
 - `virtual_network_name:` The name of the virtual network in which the subnet resides.
 - `address_prefixes:` A list of address prefixes for the subnet.
+- `enable_delegation:` A boolean flag to enable delegation for the subnet.
 
 <!-- BEGIN_TF_DOCS -->
 
